@@ -14,8 +14,21 @@
 ActiveRecord::Schema.define(version: 20151003135937) do
 
   create_table "users", force: true do |t|
+    t.string   "login"
+    t.string   "full_name"
+    t.string   "birthday"
+    t.string   "email"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.integer  "zip"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["login"], name: "index_users_on_login", unique: true
 
 end
