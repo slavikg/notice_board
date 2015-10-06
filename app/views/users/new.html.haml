@@ -1,0 +1,45 @@
+- provide(:title, 'Sign up')
+%div.container.center
+	%h1 Sign up
+	%div.sign_up.row
+		%div.span6.offset3
+			= render 'forms/new_form_for_user'
+			-# = form_for(:user, url: users_path, :class => "signup_form") do |f|
+
+			-# 	= render 'shared/error_messages', object: f.object
+
+			-# 	= f.label :login
+			-# 	= f.text_field :login
+
+			-# 	= f.label :full_name
+			-# 	= f.text_field :full_name
+
+			-# 	= f.label :birthday
+			-# 	= f.text_field :birthday
+
+			-# 	= f.label :email
+			-# 	= f.text_field :email
+
+			-# 	= f.label :address
+			-# 	= f.text_field :address
+
+			-# 	= f.label :city
+			-# 	= f.text_field :city
+
+			-# 	= f.label :state
+			-# 	= f.text_field :state
+
+			-# 	= f.label :country
+			-# 	= f.text_field :country
+
+			-# 	= f.label :zip
+			-# 	= f.text_field :zip
+
+			-# 	= f.label :password
+			-# 	= f.text_field :password
+
+			-# 	= f.label :password_confirmation, "Confirmation"
+			-# 	= f.text_field :password_confirmation
+
+			-# 	%div.new_line
+			-# 		= f.submit "Create a new user", class: 'btn btn-large btn-primary'
