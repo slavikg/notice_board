@@ -38,4 +38,20 @@ describe "User pages" do
 	    before {fillUserParams}
 	  end
 	end
+
+	describe 'show user page' do
+		let(:user) { FactoryGirl.create :user }
+	  before {visit user_path user}
+	  it { should have_title user.login }
+	  it { should have_content user.login }
+	  it { should have_link('Edit my profile', edit_user_path(user)) }
+	  it { should have_content user.full_name }
+	  it { should have_content user.birthday }
+	  it { should have_content user.email }
+	  it { should have_content user.address }
+	  it { should have_content user.city }
+	  it { should have_content user.state }
+	  it { should have_content user.country }
+	  it { should have_content user.zip }
+	end
 end
