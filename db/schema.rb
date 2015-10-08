@@ -23,12 +23,13 @@ ActiveRecord::Schema.define(version: 20151003135937) do
     t.string   "state"
     t.string   "country"
     t.integer  "zip"
+    t.string   "remember_token"
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["login"], name: "index_users_on_login", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end

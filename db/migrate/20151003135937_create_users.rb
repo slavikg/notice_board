@@ -10,10 +10,11 @@ class CreateUsers < ActiveRecord::Migration
 			t.string :state
 			t.string :country
 			t.integer :zip
+			t.string :remember_token
 			t.string :password_digest
 			t.timestamps
 		end
 		add_index :users, :login, unique: true
-		add_index :users, :email, unique: true
+		add_index :users, :remember_token
 	end
 end

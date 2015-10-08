@@ -7,9 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+	<%= render 'layouts/header' %>
+	<% flash.each do |key, value| %>
+		<%= content_tag(:div, value, class: "flash_alert alert alert-#{key}") %>
+	<% end %>
 	<%= yield %>
 	<%= debug(params) if Rails.env.development? %>
-
 </body>
 </html>
