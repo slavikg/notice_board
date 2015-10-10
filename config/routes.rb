@@ -1,4 +1,5 @@
 NoticeBoard::Application.routes.draw do
+	root 'sessions#new'
 	resources :users
 	resources :sessions, only: [:new, :create, :destroy]
 	get '/signup' => 'users#new'
