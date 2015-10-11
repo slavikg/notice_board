@@ -67,6 +67,7 @@ describe "User pages" do
 
 	  it { should have_content 'Update your profile' }
 	  it { should have_title 'Update user' }
+	  it { should have_selector 'div#maps' }
 
 	  describe 'with invalid information' do
 	    before {click_button 'Save changes'}

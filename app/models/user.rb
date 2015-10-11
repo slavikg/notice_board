@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
 	before_save {self.email = email.downcase}
 	before_create :create_remember_token
 
+	geocoded_by :full_address
+	after_validation :geocode
+
 	validates :login, length: {maximum: 15}, presence: true, uniqueness: true
 	validates :full_name, length: {in: 6..15}, presence: true
 	validates :birthday, presence: true
@@ -18,6 +21,10 @@ class User < ActiveRecord::Base
 	validates :password_confirmation, length: {in: 6..15}, presence: true
 
 	has_secure_password
+
+	def full_address
+		self.address.to_s + self.city.to_s + self.state.to_s + self.country.to_s + self.zip.to_s
+	end
 
 	def User.new_remember_token
 		SecureRandom.urlsafe_base64

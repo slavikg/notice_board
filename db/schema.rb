@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20151003135937) do
     t.integer  "zip"
     t.string   "remember_token"
     t.string   "password_digest"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

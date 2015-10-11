@@ -12,6 +12,8 @@ class CreateUsers < ActiveRecord::Migration
 			t.integer :zip
 			t.string :remember_token
 			t.string :password_digest
+			t.float :latitude
+			t.float :longitude
 			t.timestamps
 		end
 		add_index :users, :login, unique: true
