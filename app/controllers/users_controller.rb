@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	before_action :signed_in_user, only: [:edit, :update]
 	before_action :correct_user, only: [:edit, :update]
+	before_action :hash_for_gmap, only: [:show, :new, :edit]
 
 	def show
 		@user = User.find params[:id]
@@ -22,10 +23,6 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@hash = Gmaps4rails.build_markers(@user) do |user, marker|
-		  marker.lat user.latitude
-		  marker.lng user.longitude
-		end
 	end
 
 	def update
@@ -52,5 +49,13 @@ class UsersController < ApplicationController
 		def correct_user
 			@user = User.find params[:id]
 			redirect_to(root_url) if !current_user?(@user)
+		end
+
+		def hash_for_gmap
+			return if params[:id].blank?
+			@hash = Gmaps4rails.build_markers(User.find(params[:id])) do |user, marker|
+			  marker.lat user.latitude
+			  marker.lng user.longitude
+			end
 		end
 end

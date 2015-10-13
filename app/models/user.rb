@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	def full_address
-		self.address.to_s + self.city.to_s + self.state.to_s + self.country.to_s + self.zip.to_s
+		self.address.to_s + ' ' + self.city.to_s + ' ' + self.state.to_s + ' ' + self.country.to_s + ' ' + self.zip.to_s
 	end
 
 	def User.new_remember_token
