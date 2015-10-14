@@ -56,6 +56,50 @@ describe "User pages" do
 	      it { should have_link 'Sign in' }
 	    end
 	  end
+
+	  describe 'with forgotten password link' do
+	    it { should have_link('Forgotten password?', new_password_reset_path) }
+
+	    describe 'when click to "Forgotter password" link' do
+	      before {click_link 'Forgotten password?'}
+	      it { should have_title 'Reset password' }
+
+	      describe 'when click "Reset password" without email' do
+	        before {click_button 'Reset Password'}
+	        it { should have_content 'Enter your email' }
+	      end
+
+	      describe 'when click "Reset password" with email' do
+	      	let(:user) { FactoryGirl.create :user }
+	        before do
+	        	fill_in 'Email', with: user.email
+	        	click_button 'Reset Password'
+	        end
+	        it { should have_content 'Email sent with password reset instruction.' }
+
+	        describe 'change password page' do
+	          before do
+	          	user.send_password_reset
+	          	visit edit_password_reset_path(user.password_reset_token)
+	          end
+
+	          describe 'with empty data' do
+	          	before {click_button 'Update Password'}
+		          it { should have_selector 'div.alert.alert-error' }
+	          end
+
+	          describe 'with data' do
+	          	before do
+	          		fill_in 'Password', with: 'foobar'
+	          		fill_in 'Password confirmation', with: 'foobar'
+	          		click_button 'Update Password'
+	          	end
+		          it { should have_content 'Password has been reset!' }
+	          end
+	        end
+	      end
+	    end
+	  end
 	end
 
 	describe 'edit profile page' do

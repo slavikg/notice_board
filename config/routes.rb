@@ -2,6 +2,7 @@ NoticeBoard::Application.routes.draw do
 	root 'sessions#new'
 	resources :users
 	resources :sessions, only: [:new, :create, :destroy]
+	resources :password_resets
 	get '/signup' => 'users#new'
 	get '/signin' => 'sessions#new'
 	delete '/signout' => 'sessions#destroy'

@@ -26,6 +26,21 @@ class User < ActiveRecord::Base
 		self.address.to_s + ' ' + self.city.to_s + ' ' + self.state.to_s + ' ' + self.country.to_s + ' ' + self.zip.to_s
 	end
 
+	def send_password_reset
+		generate_token :password_reset_token
+		self.password_reset_sent_at = Time.zone.now
+		self.password = 'foobar'
+		self.password_confirmation = 'foobar'
+		self.save!
+		UserMailer.password_reset(self).deliver
+	end
+
+	def generate_token column
+		begin
+			self[column] = SecureRandom.urlsafe_base64
+		end while User.exists?(column => self[column])
+	end
+
 	def User.new_remember_token
 		SecureRandom.urlsafe_base64
 	end
