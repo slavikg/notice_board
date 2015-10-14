@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "User pages" do
 	subject {page}
+
 	describe "signup page" do
 		before {visit signup_path}
 		let(:submit) { "Create a new user" }
@@ -81,7 +82,9 @@ describe "User pages" do
 
 	describe 'show user page' do
 		let(:user) { FactoryGirl.create :user }
-	  before {visit user_path user}
+	  before do
+	  	sign_in user
+	  end
 	  it { should have_title user.login }
 	  it { should have_content user.login }
 	  it { should have_link('Edit my profile', edit_user_path(user)) }
@@ -93,5 +96,11 @@ describe "User pages" do
 	  it { should have_content user.state }
 	  it { should have_content user.country }
 	  it { should have_content user.zip }
+
+	  describe 'when show another users page' do
+	    let(:invalid_user) { FactoryGirl.create :user }
+	    before {visit user_path invalid_user}
+	  	it { should_not have_content 'Edit my profile' }
+	  end
 	end
 end

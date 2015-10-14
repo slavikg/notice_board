@@ -1,9 +1,9 @@
 FactoryGirl.define do
 	factory :user do
-		login "slavikg"
-		full_name "Slavik G"
+		sequence(:login) {|n| "person_login_#{n}" }
+		sequence(:full_name) {|n| "Person #{n}" }
 		birthday "31 08 1994"
-		email "example@gmail.com"
+		sequence(:email) {|n| "person_#{n}@example.com" }
 		address "street"
 		city "NY"
 		state "NY"

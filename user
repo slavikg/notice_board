@@ -1,0 +1,13 @@
+[1mdiff --git a/app/controllers/users_controller.rb b/app/controllers/users_controller.rb[m
+[1mindex ae10c1a..94115db 100644[m
+[1m--- a/app/controllers/users_controller.rb[m
+[1m+++ b/app/controllers/users_controller.rb[m
+[36m@@ -33,7 +33,7 @@[m [mclass UsersController < ApplicationController[m
+ 		end[m
+ 	end[m
+ [m
+[31m-	private[m
+[32m+[m	[32mprivatesdf[m
+ 		def user_params[m
+ 			params.require(:user).permit(:login, :full_name, :birthday, :email, :address,[m
+ 					:city, :state, :country, :zip, :password, :password_confirmation)[m

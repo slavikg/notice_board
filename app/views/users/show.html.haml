@@ -3,7 +3,8 @@
 	.row
 		.span3
 			%h2= @user.login
-			= link_to "Edit my profile", edit_user_path(@user)
+			- if current_user? @user
+				= link_to "Edit my profile", edit_user_path(@user)
 		.span6
 			.user_information= @user.full_name
 			.user_information= @user.birthday
