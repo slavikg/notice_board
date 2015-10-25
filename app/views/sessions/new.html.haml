@@ -5,6 +5,18 @@
 			%h1 Sign in
 			= render 'forms/new_form_for_sessions'
 			%p
+				Sign in with social networks
+				%ul.social_buttons_login
+					%li
+						= link_to 'auth/facebook' do
+							= image_tag 'facebook_icon.png'
+					%li
+						= link_to 'auth/twitter' do
+							= image_tag 'twitter_icon.png'
+					%li
+						= link_to 'auth/google' do
+							= image_tag 'google_plus_icon.png'
+			%p
 				New user?
 				= link_to 'Sign up now!', signup_path
 			%p

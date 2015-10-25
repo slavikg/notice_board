@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
-	before_save {self.email = email.downcase}
+	before_save {self.email.downcase!}
 	before_create :create_remember_token
 
 	geocoded_by :full_address
-	after_validation :geocode
+	before_create :geocode
+	before_update :geocode
 
 	validates :login, length: {maximum: 15}, presence: true, uniqueness: true
 	validates :full_name, length: {in: 6..15}, presence: true
@@ -47,6 +48,25 @@ class User < ActiveRecord::Base
 
 	def User.encrypt token
 		Digest::SHA1.hexdigest token.to_s
+	end
+
+	def self.sign_in_from_omniauth auth
+		find_by(provider: auth['provider'], uid: auth['uid']) || 
+			create_user_from_omniauth(auth)
+	end
+
+	def self.create_user_from_omniauth auth
+		user = new(provider: auth['provider'], uid: auth['uid'], full_name: auth['info']['name'],
+			address: auth['info']['location'], birthday: auth['extra']['birthday'],
+			image_url: auth['info']['image'], email: auth['info']['email'].to_s,
+			password: '84181949asdqwezxc19498418', password_confirmation: '84181949asdqwezxc19498418')
+		user.save! validate: false
+		user
+		# user = create(provider: auth['provider'], uid: auth['uid'], full_name: auth['info']['name'],
+				# login: auth['info']['nickname'], address: auth['info']['location'],
+				# email: auth['info']['email'])
+		# user.save! validate: false
+		# user
 	end
 
 	private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014145411) do
+ActiveRecord::Schema.define(version: 20151020184650) do
 
   create_table "users", force: true do |t|
     t.string   "login"
@@ -31,6 +31,9 @@ ActiveRecord::Schema.define(version: 20151014145411) do
     t.datetime "updated_at"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "image_url"
   end
 
   add_index "users", ["login"], name: "index_users_on_login", unique: true
