@@ -12,4 +12,11 @@ FactoryGirl.define do
 		password "foobar"
 		password_confirmation "foobar"
 	end
+
+	factory :advert do
+		name "name"
+		description "Description"
+		image "/image.jpg"
+		association :user
+	end
 end

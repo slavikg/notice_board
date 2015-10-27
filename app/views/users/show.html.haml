@@ -13,11 +13,15 @@
 			.user_information= @user.email
 			.user_information= @user.address
 			.user_information
-				= @user.city
-				,
-				= @user.state
-				,
-				= @user.country
-				,
-				= @user.zip
+				- if @user.city
+					= @user.city
+				- if @user.state
+					,
+					= @user.state
+				- if @user.country
+					,
+					= @user.country
+				- if @user.zip
+					,
+					= @user.zip
 		= render 'shared/user_map'

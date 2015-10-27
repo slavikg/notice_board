@@ -1,0 +1,6 @@
+- provide(:title, @advert.name)
+
+- if @advert.image.blank?
+	= image_tag "no_image.jpg", alt: 'no image', size: "200x150"
+- else
+	= image_tag @advert.image, alt: 'image', size: "200x150"

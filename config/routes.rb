@@ -1,6 +1,7 @@
 NoticeBoard::Application.routes.draw do
 	root 'sessions#new'
 	resources :users
+	resources :adverts
 	resources :sessions, only: [:new, :create, :destroy]
 	resources :password_resets
 	get '/signup' => 'users#new'

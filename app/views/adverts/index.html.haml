@@ -1,0 +1,16 @@
+- provide(:title, 'Adverts')
+
+.container
+	.row
+		- @adverts.each do |advert|
+			.span6
+				.new_line
+					%h3= advert.name
+				- if advert.image.blank?
+					= image_tag "no_image.jpg", alt: 'no image', size: "200x150"
+				- else
+					= image_tag advert.image, alt: 'image', size: "200x150"
+				.new_line
+					%p= advert.description
+				.new_line
+					= link_to 'Show advert', advert_path(advert)

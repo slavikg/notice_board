@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+	has_many :adverts
+	has_many :comments
+	
 	before_save {self.email.downcase!}
 	before_create :create_remember_token
 
