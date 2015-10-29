@@ -1,0 +1,20 @@
+- provide(:title, 'New advert')
+
+.container.center
+
+	-# # = form_for(@advert, url: 'Advert/new') do |f|
+	= form_for @advert do |f|
+
+		= render 'shared/error_messages', object: f.object
+
+		= f.label :name
+		= f.text_field :name
+
+		= f.label :description
+		= f.text_area :description
+
+		= f.label :image
+		= f.text_field :image
+
+		.new_line
+			= f.submit 'Create Advert', class: 'btn btn-large btn-primary'

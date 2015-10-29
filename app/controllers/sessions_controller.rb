@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
 			user = User.sign_in_from_omniauth(auth)
 			session[:user_id] = user.id
 			sign_in(user, true)
-			redirect_to user
+			redirect_back_or user
 			# redirect_to root_url
 		end
 	end

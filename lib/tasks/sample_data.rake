@@ -11,5 +11,17 @@ namespace :db do
     		city: "NY", state: "NY", country: "USA", zip: 12345,
     		password: "foobar", password_confirmation: "foobar")
 		end
+		user1 = User.first
+		user2 = User.find 2
+		i = 1
+		3.times do |n|
+			advert = user1.adverts.build(name: "Advert_#{i}",
+				description: Faker::Lorem.sentence(100), image: '')
+			advert.save
+			advert = user2.adverts.build(name: "Advert_#{i + 1}",
+				description: Faker::Lorem.sentence(100), image: '')
+			advert.save
+			i += 2
+		end
 	end
 end																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				
