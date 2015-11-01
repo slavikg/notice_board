@@ -1,11 +1,4 @@
 - provide(:title, @advert.name)
 
 .container
-	.new_line
-		%h3= @advert.name
-	- if @advert.image.blank?
-		= image_tag "no_image.jpg", alt: 'no image', size: "200x150"
-	- else
-		= image_tag @advert.image, alt: 'image', size: "200x150"
-	.new_line
-		%p= @advert.description
+	= render @advert, user_advert: true, full_content: true

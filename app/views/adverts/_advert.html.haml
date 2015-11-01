@@ -1,0 +1,23 @@
+.new_line
+	%h3= advert.name
+- if user_advert
+	.new_line
+		%p
+			Author:
+			= link_to advert.user.full_name, user_path(advert.user)
+- image_size = full_content ? "300x200" : "100x50"
+- if advert.image.blank?
+	= image_tag "no_image.jpg", alt: 'no image', size: image_size,
+		class: 'advert_image'
+- else
+	= image_tag advert.image, alt: 'image', size: image_size,
+		class: 'advert_image'
+-# .new_line
+%p{class: ('no_float' if full_content)}
+	- if full_content
+		= advert.description
+	- else
+		= advert.description.truncate(160, separator: /\s/)
+- if !full_content
+	.new_line
+		= link_to 'Show advert', advert_path(advert)

@@ -14,8 +14,8 @@ FactoryGirl.define do
 	end
 
 	factory :advert do
-		name "name"
-		description "Description"
+		sequence(:name) {|n| "Advert_#{n}"}
+		description Faker::Lorem.sentence(100)
 		image "/image.jpg"
 		association :user
 	end

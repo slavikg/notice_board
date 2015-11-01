@@ -14,6 +14,18 @@ class AdvertsController < ApplicationController
 	end
 
 	def create
-		# advert = current_user.
+		@advert = current_user.adverts.build advert_params
+		if @advert.save
+			redirect_to @advert
+		else
+			# flash[:error] = "Fill in all "
+			render 'new'
+		end
+	end
+
+	private
+
+	def advert_params
+		params.require(:advert).permit(:name, :description, :image)
 	end
 end

@@ -1,9 +1,9 @@
 - provide(:title, 'New advert')
 
 .container.center
-
-	-# # = form_for(@advert, url: 'Advert/new') do |f|
-	= form_for @advert do |f|
+	%h1 Creating Advert
+	
+	= form_for(@advert, url: {action: "create"}) do |f|
 
 		= render 'shared/error_messages', object: f.object
 

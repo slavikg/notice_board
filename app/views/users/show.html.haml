@@ -1,8 +1,9 @@
 - provide(:title, @user.login)
-.user_profile_page.container
+
+.container
 	.row
 		.span6
-			%h2= @user.login
+			%h2.user_profile_page= @user.login
 			= image_tag @user.image_url
 			- if current_user? @user
 				.new_line
@@ -25,3 +26,12 @@
 					,
 					= @user.zip
 		= render 'shared/user_map'
+	%h2.new_section Adverts
+	- if @adverts.blank?
+		%p No adverts
+	- else
+		.row
+			- @adverts.each do |advert|
+				.span6
+					= render advert, user_advert: false, full_content: false
+			= will_paginate @adverts

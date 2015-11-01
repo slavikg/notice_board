@@ -1,5 +1,5 @@
 NoticeBoard::Application.routes.draw do
-	root 'sessions#new'
+	root 'adverts#index'
 	resources :users
 	resources :adverts
 	resources :sessions, only: [:new, :create, :destroy]
