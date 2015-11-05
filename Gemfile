@@ -52,6 +52,10 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 
+gem 'figaro'
+
+gem 'paperclip'
+
 group :doc do
 	gem 'sdoc', '0.3.20', require: false
 end
