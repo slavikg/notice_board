@@ -5,4 +5,5 @@
 		- @adverts.each do |advert|
 			.span6
 				= render advert, user_advert: true, full_content: false
-		= will_paginate @adverts
+		.no_float
+			= will_paginate @adverts

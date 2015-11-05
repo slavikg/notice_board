@@ -2,3 +2,4 @@
 
 .container
 	= render @advert, user_advert: true, full_content: true
+	= link_to 'Edit advert', edit_advert_path(@advert)

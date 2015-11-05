@@ -1,9 +1,9 @@
-- provide(:title, 'New advert')
+- provide(:title, 'Edit Advert')
 
 .container.center
 	%h1 Creating Advert
 	
-	= form_for(@advert, url: {action: "create"}, html: {multipart: true}) do |f|
+	= form_for(@advert, url: {action: "update"}, html: {multipart: true}) do |f|
 
 		= render 'shared/error_messages', object: f.object
 
@@ -17,4 +17,4 @@
 		= f.file_field :image
 
 		.new_line
-			= f.submit 'Create Advert', class: 'btn btn-large btn-primary'
+			= f.submit 'Edit Advert', class: 'btn btn-large btn-primary'

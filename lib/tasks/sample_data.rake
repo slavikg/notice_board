@@ -6,7 +6,7 @@ namespace :db do
     		city: "NY", state: "NY", country: "USA", zip: 12345,
     		password: "foobar", password_confirmation: "foobar")
 		4.times do |n|
-			User.create!(login: "persone_#{n}", full_name: "Person #{n}",
+			User.create!(login: "persone_#{n}", full_name: Faker::Name.name,
     		birthday: "20 02 1994", email: "person#{n}@gmail.com", address: "Medison",
     		city: "NY", state: "NY", country: "USA", zip: 12345,
     		password: "foobar", password_confirmation: "foobar")
@@ -14,7 +14,7 @@ namespace :db do
 		user1 = User.first
 		user2 = User.find 2
 		i = 1
-		3.times do |n|
+		25.times do |n|
 			advert = user1.adverts.build(name: "Advert_#{i}",
 				description: Faker::Lorem.sentence(100), image: '')
 			advert.save

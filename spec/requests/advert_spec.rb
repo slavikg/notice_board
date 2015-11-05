@@ -22,7 +22,7 @@ describe 'Page Adverts' do
 			visit advert_path(advert)
 		end
 		it { should have_title advert.name }
-		it { should have_css 'img[alt="image"]' }
+		# it { should have_css 'img[alt="image"]' }
 		it { should have_content advert.name }
 		it { should have_content advert.description }
 		it { should have_content "Author: #{advert.user.full_name}" }
@@ -57,7 +57,7 @@ describe 'Page Adverts' do
 		    it { should have_selector 'div.alert.alert-error' }
 		  end
 
-		  describe 'create advert with dull data' do
+		  describe 'create advert with full data' do
 		  	let(:advert) { FactoryGirl.create :advert }
 		    before do
 		    	fill_in 'Name', with: advert.name
@@ -67,6 +67,20 @@ describe 'Page Adverts' do
 
 		    it { should have_title advert.name }
 		  end
+	  end
+	end
+
+	describe 'Edit' do
+		let(:advert) { FactoryGirl.create :advert }
+	  before {visit edit_advert_path advert}
+	  it { should have_title 'Edit Advert' }
+
+	  describe 'update parameters' do
+	  	before do
+	    	fill_in 'Description', with: Faker::Lorem.sentence(100)
+	    	click_button 'Edit Advert'
+	    end
+		  it { should have_content 'Advert update success!' }
 	  end
 	end
 end

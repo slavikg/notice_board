@@ -1,5 +1,7 @@
 class AdvertsController < ApplicationController
 
+	before_action :access_to_edit, only: [:edit, :update]
+
 	def index
 		@adverts = Advert.all.paginate(page: params[:page])
 	end
@@ -23,9 +25,27 @@ class AdvertsController < ApplicationController
 		end
 	end
 
+	def edit
+	end
+
+	def update
+		@advert.update_attributes advert_params
+		if @advert.save
+			flash[:success] = 'Advert update success!'
+			redirect_to @advert
+		else
+			render 'edit'
+		end
+	end
+
 	private
 
 	def advert_params
 		params.require(:advert).permit(:name, :description, :image)
+	end
+
+	def access_to_edit
+		@advert = Advert.find params[:id]
+		redirect_to @advert, notice: "You don't have permittion to edit this advert! Please sign in if this your advert" if !current_user?(@user)
 	end
 end

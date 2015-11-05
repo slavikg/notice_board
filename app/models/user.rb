@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 	before_update :geocode
 
 	validates :login, length: {maximum: 15}, presence: true, uniqueness: true
-	validates :full_name, length: {in: 6..15}, presence: true
+	validates :full_name, length: {in: 6..30}, presence: true
 	validates :birthday, presence: true
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, format: {with: VALID_EMAIL_REGEX},
