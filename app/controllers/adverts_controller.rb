@@ -46,6 +46,7 @@ class AdvertsController < ApplicationController
 
 	def access_to_edit
 		@advert = Advert.find params[:id]
-		redirect_to @advert, notice: "You don't have permittion to edit this advert! Please sign in if this your advert" if !current_user?(@user)
+		redirect_to @advert,
+			notice: "You don't have permittion to edit this advert! Please sign in if this your advert" if !current_user?(@advert.user)
 	end
 end
