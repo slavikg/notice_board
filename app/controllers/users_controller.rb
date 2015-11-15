@@ -3,9 +3,13 @@ class UsersController < ApplicationController
 	before_action :correct_user, only: [:edit, :update]
 	before_action :hash_for_gmap, only: [:show, :new, :edit]
 
+	def index
+		@users = User.all.paginate(page: params[:page], per_page: 20)
+	end
+
 	def show
 		@user = User.find params[:id]
-		@adverts = @user.adverts.paginate(page: params[:page], per_page: 4)
+		@adverts = @user.adverts.paginate(page: params[:page], per_page: 6)
 	end
 
 	def new

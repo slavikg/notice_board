@@ -1,0 +1,13 @@
+%div.advert_comment.no_float
+	%div.info_user.float_left
+		%p= link_to comment.user.full_name, user_path(comment.user)
+		- size = '100x50'
+		- if comment.user.image_url.present?
+			= image_tag comment.user.image_url, size: size
+		- else
+			= image_tag 'no_image.jpg', size: size
+		- if comment.user == current_user
+			.new_line
+				= link_to 'Delete comment', advert_comment_path(comment.advert, comment),
+					method: :delete
+	%p= comment.comment

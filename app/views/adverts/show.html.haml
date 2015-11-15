@@ -3,3 +3,20 @@
 .container
 	= render @advert, user_advert: true, full_content: true
 	= link_to 'Edit advert', edit_advert_path(@advert)
+	= link_to 'Delete advert', @advert, method: :delete, data: {confirm: 'You sure?'}, title: @advert.name
+
+	- if @comments.blank?
+		%h3 No comments
+	- else
+		%h3 Comments
+		= render @advert.comments
+
+	- if signed_in?
+		= form_for [@advert, @advert.comments.build], html: {class: 'no_float'} do |f|
+			= render 'shared/error_messages', object: f.object
+
+			= f.label :comment
+			= f.text_area :comment
+
+			.new_line
+				= f.submit 'Create comment', class: 'btn btn-small btn-primary'

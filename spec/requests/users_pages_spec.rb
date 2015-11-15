@@ -103,6 +103,27 @@ describe "User pages" do
 		end
 	end
 
+	describe 'index page' do
+
+		describe 'without users' do
+			before {visit users_path}
+
+		  it { should have_title 'Users' }
+		  it { should have_content 'No users' }
+		end
+
+	  describe 'with users' do
+	  	let!(:user) { FactoryGirl.create :user }
+	    before do
+	    	5.times {FactoryGirl.create :user}
+				visit users_path
+	    end
+
+	    it { should have_content user.full_name }
+	    it { should have_link 'Show user', user_path(user) }
+	  end
+	end
+
 	describe 'edit profile page' do
 		let(:user) { FactoryGirl.create :user }
 		before do

@@ -17,6 +17,7 @@
 
 # Ignore application configuration
 /config/application.yml
+/config/dropbox.yml
 
 #photos
 /system/a1dverts

@@ -5,7 +5,7 @@ namespace :db do
     		birthday: "20 02 1994", email: "example@gmail.com", address: "Wall Street",
     		city: "NY", state: "NY", country: "USA", zip: 12345,
     		password: "foobar", password_confirmation: "foobar")
-		4.times do |n|
+		30.times do |n|
 			User.create!(login: "persone_#{n}", full_name: Faker::Name.name,
     		birthday: "20 02 1994", email: "person#{n}@gmail.com", address: "Medison",
     		city: "NY", state: "NY", country: "USA", zip: 12345,

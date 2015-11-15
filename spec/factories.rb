@@ -19,4 +19,10 @@ FactoryGirl.define do
 		image ""
 		association :user
 	end
+
+	factory :comment do
+		comment Faker::Lorem.sentence(30)
+		association :user
+		association :advert
+	end
 end

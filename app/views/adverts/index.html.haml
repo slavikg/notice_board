@@ -1,9 +1,14 @@
 - provide(:title, 'Adverts')
 
 .container
-	.row
-		- @adverts.each do |advert|
-			.span6
-				= render advert, user_advert: true, full_content: false
-		.no_float
+
+	%h1.new_section Adverts
+
+	- if @adverts.blank?
+		%p No adverts
+	- else
+		.row
+			- @adverts.each do |advert|
+				.span6
+					= render advert, user_advert: true, full_content: false
 			= will_paginate @adverts

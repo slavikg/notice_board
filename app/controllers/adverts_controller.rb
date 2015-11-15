@@ -1,6 +1,6 @@
 class AdvertsController < ApplicationController
 
-	before_action :access_to_edit, only: [:edit, :update]
+	before_action :access_to_action, only: [:edit, :update, :destroy]
 
 	def index
 		@adverts = Advert.all.paginate(page: params[:page])
@@ -8,6 +8,8 @@ class AdvertsController < ApplicationController
 
 	def show
 		@advert = Advert.find params[:id]
+		@comments = @advert.comments
+		# @comment = @advert.comments.build
 	end
 
 	def new
@@ -38,13 +40,20 @@ class AdvertsController < ApplicationController
 		end
 	end
 
+	def destroy
+		@advert = Advert.find params[:id]
+		@advert.destroy
+		flash[:success] = 'Your advert have been deleted!'
+		redirect_to root_url
+	end
+
 	private
 
 	def advert_params
 		params.require(:advert).permit(:name, :description, :image)
 	end
 
-	def access_to_edit
+	def access_to_action
 		@advert = Advert.find params[:id]
 		redirect_to @advert,
 			notice: "You don't have permittion to edit this advert! Please sign in if this your advert" if !current_user?(@advert.user)

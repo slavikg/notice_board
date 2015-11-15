@@ -1,0 +1,19 @@
+- provide(:title, 'Users')
+
+.container
+
+	%h1.new_section Users
+
+
+	- if @users.blank?
+		%p No users
+	- else
+		.row
+			- @users.each do |user|
+				.span6
+					- user_image = user.image_url || 'no_image.jpg'
+					= image_tag user_image, size: '100x50', class: 'user_image'
+					%p{class: 'new_line'}
+						= user.full_name
+					= link_to 'Show user', user_path(user)
+			= will_paginate @users

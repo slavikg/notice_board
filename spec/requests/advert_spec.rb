@@ -6,11 +6,14 @@ describe 'Page Adverts' do
 
 	describe 'Index' do
 		before {visit adverts_path}
+
 		it { should have_title 'Adverts' }
+		it { should have_content 'No adverts' }
 
 		describe 'author advert' do
 		  let!(:advert) { FactoryGirl.create :advert }
 		  before {visit adverts_path}
+		  it { should have_content advert.name }
 		  it { should have_content "Author: #{advert.user.full_name}" }
 		end
 	end
@@ -34,7 +37,25 @@ describe 'Page Adverts' do
 				advert.save!
 				visit advert_path(advert)
 			end
+
 			it { should have_css 'img[alt="no image"]' }
+		end
+
+		describe 'delete advert' do
+			# CanCan
+		  # it { should_not have_link 'Delete advert' }
+
+		  describe 'with sign user' do
+		    before do
+		    	sign_in user
+		    	visit advert_path advert
+		    end
+		    
+			  it { should have_link 'Delete advert' }
+			  describe 'after delete' do
+			    it { expect{click_link 'Delete advert'}.to change(Advert, :count).by(-1) }
+			  end
+		  end
 		end
 	end
 
@@ -71,12 +92,17 @@ describe 'Page Adverts' do
 	end
 
 	describe 'Edit' do
-		let(:advert) { FactoryGirl.create :advert }
-	  before {visit edit_advert_path advert}
+		let!(:advert) { FactoryGirl.create :advert }
+	  before do
+	  	sign_in advert.user
+	  	visit edit_advert_path advert
+	  end
+
 	  it { should have_title 'Edit Advert' }
 
 	  describe 'update parameters' do
 	  	before do
+	  		visit edit_advert_path advert
 	    	fill_in 'Description', with: Faker::Lorem.sentence(100)
 	    	click_button 'Edit Advert'
 	    end
