@@ -55,7 +55,8 @@ gem 'omniauth-google-oauth2'
 gem 'figaro'
 
 gem 'paperclip'
-gem 'paperclip-googledrive'
+
+gem 'RedCloth'
 
 group :doc do
 	gem 'sdoc', '0.3.20', require: false

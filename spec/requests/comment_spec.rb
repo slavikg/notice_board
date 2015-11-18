@@ -62,6 +62,15 @@ describe 'Comments' do
 				  end
 				end
 			end
+
+			describe 'comment with textile content' do
+			  before do
+			  	fill_in 'Comment', with: '*strong*'
+			  	click_button 'Create comment'
+			  end
+			  it { should have_selector 'strong', text: 'strong' }
+			end
 		end
+
 	end
 end
