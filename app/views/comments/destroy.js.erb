@@ -1,0 +1,6 @@
+if(<%= @comment.advert.comments.blank? %>)
+	$('#comments_label').hide().text('No comments').fadeIn(1000)
+
+$('#comment_<%= @comment.id %>').fadeOut(1000, function(){
+	$(this).remove()
+})

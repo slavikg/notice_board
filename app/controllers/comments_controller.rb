@@ -24,7 +24,12 @@ class CommentsController < ApplicationController
 
 		@comment.delete if @comment.user == current_user
 
-		redirect_to @advert
+		respond_to do |format|
+			format.html {redirect_to @advert}
+			format.js
+		end
+
+		# redirect_to @advert
 	end
 
 	private

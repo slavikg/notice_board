@@ -9,5 +9,5 @@
 		- if comment.user == current_user
 			.new_line
 				= link_to 'Delete comment', advert_comment_path(comment.advert, comment),
-					method: :delete, data: {confirm: 'You sure?'}
+					method: :delete, remote: true, data: {confirm: 'You sure?'}
 	%p= raw RedCloth.new(html_escape(comment.comment)).to_html

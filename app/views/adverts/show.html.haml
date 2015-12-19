@@ -3,7 +3,8 @@
 .container
 	= render @advert, user_advert: true, full_content: true
 	= link_to 'Edit advert', edit_advert_path(@advert)
-	= link_to 'Delete advert', @advert, method: :delete, data: {confirm: 'You sure?'}, title: @advert.name
+	= link_to 'Delete advert', @advert, method: :delete, data: {confirm: 'You sure?'},
+		title: @advert.name
 
 	- if @comments.blank?
 		%h3#comments_label No comments

@@ -35,6 +35,8 @@ describe 'Comments' do
 
 				it do
 					expect{click_button 'Create comment'}.to change(Comment, :count).by(1)
+					should_not have_content 'No comments'
+					should have_content 'Comments'
 				end
 
 				describe 'check content' do
@@ -49,6 +51,8 @@ describe 'Comments' do
 
 				  it 'with correct user' do
 				  	expect{click_link 'Delete comment'}.to change(Comment, :count).by(-1)
+				  	should have_content 'No comments'
+						should_not have_content 'Comments'
 				  end
 
 				  describe 'with incorrect user' do

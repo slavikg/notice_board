@@ -1,5 +1,11 @@
 @import 'bootstrap'
 
+@mixin tran($transition...)
+	transition: $transition
+	-webkit-transition: $transition
+	-moz-transition: $transition
+	-o-transition: $transition
+
 li
 	list-style: none
 div, ul, li, h1, h2, h3, h4, h5, h6, p, a, span
@@ -13,6 +19,8 @@ h1
 	float: left
 .no_float
 	clear: both
+	display: inline-block
+	width: 100%
 .flash_alert
 	text-align: center
 .center
@@ -52,4 +60,5 @@ h2.user_profile_page
 .advert_comment
 	margin-top: 10px
 	.info_user
+		width: 120px
 		margin: 0px 20px 10px 0px
