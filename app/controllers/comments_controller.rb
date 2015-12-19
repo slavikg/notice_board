@@ -5,13 +5,17 @@ class CommentsController < ApplicationController
 		@comment = @advert.comments.build comment_params
 		@comment.user = current_user
 
-		if @comment.save
-			flash[:success] = 'Your comment added'
-		else
-			flash[:notice] = "Comment can't be empty!"
-		end
+		# flash[:success] = 'Your comment added'
+		# flash[:notice] = "Comment can't be empty!"
 
-		redirect_to @advert
+		respond_to do |format|
+			if @comment.save
+				format.html {redirect_to @advert}
+				format.js
+			else
+				format.html {redirect_to @advert}
+			end
+		end
 	end
 
 	def destroy

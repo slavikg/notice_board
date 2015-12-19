@@ -1,0 +1,7 @@
+if($('#comments_label').text() == 'No comments')
+	$('#comments_label').hide().text('Comments').fadeIn(1000)
+
+$('#container_comments').append('<%= j render @comment %>')
+$('#comment_<%= @comment.id %>').hide().fadeIn(1000)
+
+$('#comment_comment').val('')

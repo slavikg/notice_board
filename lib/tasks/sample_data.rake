@@ -23,5 +23,11 @@ namespace :db do
 			advert.save
 			i += 2
 		end
+		advert = Advert.first
+		10.times do |n|
+			comment = advert.comments.build(comment: "#{n} comment")
+			comment.user = User.find n
+			comment.save
+		end
 	end
 end																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				

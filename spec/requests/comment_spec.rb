@@ -40,7 +40,7 @@ describe 'Comments' do
 				describe 'check content' do
 					before {click_button 'Create comment'}
 
-					it {should have_content 'Your comment added'}
+					# it {should have_content 'Your comment added'}
 					it {should have_content comment.comment}
 					it {should have_content comment.user.full_name}
 				end
