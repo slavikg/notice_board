@@ -1,4 +1,5 @@
 class Advert < ActiveRecord::Base
+
 	belongs_to :user
 	has_many :comments
 
@@ -17,4 +18,6 @@ class Advert < ActiveRecord::Base
 	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
 	self.per_page = 8
+
+	
 end

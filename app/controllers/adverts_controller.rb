@@ -3,7 +3,20 @@ class AdvertsController < ApplicationController
 	before_action :access_to_action, only: [:edit, :update, :destroy]
 
 	def index
-		@adverts = Advert.all.paginate(page: params[:page])
+		# @adverts = Advert.all.paginate(page: params[:page])
+		# @adverts = Advert.where(["name || description LIKE ?", "%#{params[:search]}%"]).
+		# 	paginate(page: params[:page])
+		# if params[:search].present?
+		# 	@adverts = Advert.search(params[:search]).records.paginate(page: params[:page])
+		# else
+		# 	@adverts = Advert.all.paginate(page: params[:page])
+		# end
+		if params[:search].present?
+			@adverts = Advert.where(["name || description LIKE ?", "%#{params[:search]}%"]).
+				paginate(page: params[:page])
+		else
+			@adverts = Advert.all.paginate(page: params[:page])
+		end
 	end
 
 	def show
