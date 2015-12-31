@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+	- 2.0.0p645
+env:
+	- DB=sqlite
+before_script:
+	- bundle exec rake db:create:all db:migrate db:populate test:prepare
+script:
+	- bundle exec rspec --color --format documentation
