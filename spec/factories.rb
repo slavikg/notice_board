@@ -1,6 +1,6 @@
 FactoryGirl.define do
 	factory :user do
-		sequence(:login) {|n| "person_login_#{n}" }
+		sequence(:login) {|n| "login_#{n}" }
 		sequence(:full_name) {|n| "Person #{n}" }
 		birthday "31 08 1994"
 		sequence(:email) {|n| "person_#{n}@example.com" }
@@ -17,6 +17,7 @@ FactoryGirl.define do
 		sequence(:name) {|n| "Advert_#{n}"}
 		description Faker::Lorem.sentence(100)
 		image ""
+		tags "tag"
 		association :user
 	end
 

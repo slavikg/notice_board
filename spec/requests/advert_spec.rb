@@ -124,9 +124,9 @@ describe 'Page Adverts' do
 		  end
 		end
 
-		describe 'with tags' do
-		  it { should have_link "##{advert.tags}" }
-		end
+		# describe 'with tags' do
+		#   it { should have_link "##{advert.tags}" }
+		# end
 	end
 
 	describe 'New' do
