@@ -16,6 +16,72 @@ describe 'Page Adverts' do
 		  it { should have_content advert.name }
 		  it { should have_content "Author: #{advert.user.full_name}" }
 		end
+
+		describe 'search' do
+		  let!(:advert) { FactoryGirl.create :advert }
+			before do
+				advert.user.country = 'Ukraine'
+				advert.user.save!
+				visit adverts_path
+			end
+
+			it 'empty data' do
+				click_button 'Search'
+		  	should have_selector('.advert h3', advert.name)
+			end
+
+		  it 'in-correct data' do
+		  	fill_in 'search', with: 'foobar'
+		  	click_button 'Search'
+		  	should have_content 'No adverts'
+		  end
+
+		  it 'correct advert.name' do
+		  	fill_in 'search', with: advert.name
+		  	click_button 'Search'
+		  	should have_selector('.advert h3', advert.name)
+		  end
+
+		  it 'correct advert.description' do
+		  	fill_in 'search', with: advert.description
+		  	click_button 'Search'
+		  	should have_selector('.advert p', advert.description)
+		  end
+
+		  it 'correct advert.user.full_name' do
+		  	fill_in 'search', with: advert.user.full_name
+		  	click_button 'Search'
+		  	should have_selector('.advert a', advert.user.full_name)
+		  end
+
+		  describe 'correct advert.user address' do
+			  it 'address' do
+			  	fill_in 'search', with: advert.user.address
+			  	click_button 'Search'
+			  	should have_selector('.advert h3', advert.name)
+			  end
+			  it 'city' do
+			  	fill_in 'search', with: advert.user.city
+			  	click_button 'Search'
+			  	should have_selector('.advert h3', advert.name)
+			  end
+			  it 'state' do
+			  	fill_in 'search', with: advert.user.state
+			  	click_button 'Search'
+			  	should have_selector('.advert h3', advert.name)
+			  end
+			  it 'country' do
+			  	fill_in 'search', with: advert.user.country
+			  	click_button 'Search'
+			  	should have_selector('.advert h3', advert.name)
+			  end
+			  it 'zip' do
+			  	fill_in 'search', with: advert.user.zip
+			  	click_button 'Search'
+			  	should have_selector('.advert h3', advert.name)
+			  end
+		  end
+		end
 	end
 
 	describe 'Show' do
@@ -56,6 +122,10 @@ describe 'Page Adverts' do
 			    it { expect{click_link 'Delete advert'}.to change(Advert, :count).by(-1) }
 			  end
 		  end
+		end
+
+		describe 'with tags' do
+		  it { should have_link "##{advert.tags}" }
 		end
 	end
 

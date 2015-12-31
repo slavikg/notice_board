@@ -73,6 +73,11 @@ class User < ActiveRecord::Base
 		# user
 	end
 
+	# def self.search_for_advert(params)
+	# 	select(:id).where("full_name like :search_user",
+	# 		{search_user: "%#{params}%"})
+	# end
+
 	private
 		def create_remember_token
 			self.remember_token = User.encrypt User.new_remember_token

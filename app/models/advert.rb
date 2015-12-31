@@ -19,5 +19,14 @@ class Advert < ActiveRecord::Base
 
 	self.per_page = 8
 
+	def self.search(params)
+		# where("(name || description like :search_param) || (user_id like :search_by_user)",
+		# 		{search_param: "%#{params}%",
+		# 		search_by_user: "%#{User.search_for_advert(params)}%" })
+		joins(:user).where("(adverts.name || adverts.description like :search_param) ||
+			(users.full_name || users.address || users.city || users.state ||
+			users.country || users.zip like :search_param)",
+			{search_param: "%#{params}%"})
+	end
 	
 end

@@ -12,8 +12,14 @@ class AdvertsController < ApplicationController
 		# 	@adverts = Advert.all.paginate(page: params[:page])
 		# end
 		if params[:search].present?
-			@adverts = Advert.where(["name || description LIKE ?", "%#{params[:search]}%"]).
-				paginate(page: params[:page])
+			# @adverts = Advert.where(["name || description LIKE ?", "%#{params[:search]}%"]).
+			# 	join(:Advert).where([{user_id: {User.full_name: params[:search]}}]).
+			# @adverts = Advert.where(["user_id like ?", User.where(["full_name like ?", "%#{params[:search]}%"])]).
+				# paginate(page: params[:page])
+			@adverts = Advert.search(params[:search]).paginate(page: params[:page])
+				# user_id: User.where(["full_name like ?", "%#{params[:search]}%"])).
+				# render xml: @adverts
+				# joins(:adverts).where(user_id: User.where(["full_name like ?", "%#{params[:search]}%"]))
 		else
 			@adverts = Advert.all.paginate(page: params[:page])
 		end
