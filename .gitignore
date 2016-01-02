@@ -20,3 +20,6 @@
 
 #photos
 /system/a1dverts
+
+#Coverage test code
+/coverage
