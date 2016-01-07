@@ -5,6 +5,9 @@ class Advert < ActiveRecord::Base
 
 	validates :name, presence: true, length: {maximum: 60}
 	validates :description, presence: true, length: {maximum: 800}
+	VALID_TAGS_REGEX = /\A^([0-9a-z_][^\s,'+-]+)(\s[^\s,'+-][0-9a-z_]+)*$\z/i
+	validates :tags, allow_blank: true, format: {with: VALID_TAGS_REGEX,
+		message: "should be separated by a space and begin without #"}
 
 	has_attached_file :image,
 		url: '/system/a1dvert/:attachment/:id_partition/:style/:filename',
@@ -23,8 +26,8 @@ class Advert < ActiveRecord::Base
 		# where("(name || description like :search_param) || (user_id like :search_by_user)",
 		# 		{search_param: "%#{params}%",
 		# 		search_by_user: "%#{User.search_for_advert(params)}%" })
-		joins(:user).where("(adverts.name || adverts.description like :search_param) ||
-			(users.full_name || users.address || users.city || users.state ||
+		joins(:user).where("(adverts.name || adverts.description || adverts.tags like :search_param)
+			|| (users.full_name || users.address || users.city || users.state ||
 			users.country || users.zip like :search_param)",
 			{search_param: "%#{params}%"})
 	end

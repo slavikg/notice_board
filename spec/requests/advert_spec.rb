@@ -15,6 +15,7 @@ describe 'Page Adverts' do
 		  before {visit adverts_path}
 		  it { should have_content advert.name }
 		  it { should have_content "Author: #{advert.user.full_name}" }
+		  it 'with tags' do should have_link "##{advert.tags}" end
 		end
 
 		describe 'search' do
@@ -46,6 +47,16 @@ describe 'Page Adverts' do
 		  	fill_in 'search', with: advert.description
 		  	click_button 'Search'
 		  	should have_selector('.advert p', advert.description)
+		  end
+
+		  it 'correct advert.tags' do
+		  	advert.update_attributes tags: "good_tag"
+		  	tags = %w[tag good_tag]
+		  	tags.each do |tag|
+			  	fill_in 'search', with: tag
+			  	click_button 'Search'
+			  	should have_selector('.advert p', advert.description)
+			  end
 		  end
 
 		  it 'correct advert.user.full_name' do
@@ -96,6 +107,7 @@ describe 'Page Adverts' do
 		it { should have_content advert.description }
 		it { should have_content "Author: #{advert.user.full_name}" }
 		it { should have_link(advert.user.full_name, user_path(advert.user)) }
+		it 'with tags' do should have_link "##{advert.tags}" end
 
 		describe 'without photo' do
 			before do
@@ -123,10 +135,6 @@ describe 'Page Adverts' do
 			  end
 		  end
 		end
-
-		# describe 'with tags' do
-		#   it { should have_link "##{advert.tags}" }
-		# end
 	end
 
 	describe 'New' do
@@ -148,11 +156,27 @@ describe 'Page Adverts' do
 		    it { should have_selector 'div.alert.alert-error' }
 		  end
 
+		  describe 'crete with wrong tags' do
+		  	let(:advert) { FactoryGirl.create :advert }
+		    let(:tags_array) { %w[tag\ best_tag- tag-best_tag tag' tag,\ best_tag] }
+
+		    it 'should be invalid' do
+		    	tags_array.each do |tags|
+			    	fill_in 'Name', with: advert.name
+			    	fill_in 'Description', with: advert.description
+			    	fill_in 'Tags', with: tags
+			    	click_button 'Create Advert'
+			    	should have_selector 'div.alert.alert-error'
+			    end
+		    end
+		  end
+
 		  describe 'create advert with full data' do
 		  	let(:advert) { FactoryGirl.create :advert }
 		    before do
 		    	fill_in 'Name', with: advert.name
 		    	fill_in 'Description', with: advert.description
+		    	fill_in 'Tags', with: 'tags'
 		    	click_button 'Create Advert'
 		    end
 

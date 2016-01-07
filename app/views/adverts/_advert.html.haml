@@ -23,3 +23,9 @@
 	- if !full_content
 		.new_line
 			= link_to 'Show advert', advert_path(advert)
+	- if advert.tags.present?
+		%div.new_line
+			%h5
+				Tags
+				- advert.tags.split(' ').each do |tag|
+					= link_to "##{tag}", controller: 'adverts', action: 'index', search: "#{tag}"

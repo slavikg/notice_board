@@ -11,6 +11,7 @@ class AdvertsController < ApplicationController
 		# else
 		# 	@adverts = Advert.all.paginate(page: params[:page])
 		# end
+		# render json: params
 		if params[:search].present?
 			# @adverts = Advert.where(["name || description LIKE ?", "%#{params[:search]}%"]).
 			# 	join(:Advert).where([{user_id: {User.full_name: params[:search]}}]).
@@ -69,7 +70,7 @@ class AdvertsController < ApplicationController
 	private
 
 	def advert_params
-		params.require(:advert).permit(:name, :description, :image)
+		params.require(:advert).permit(:name, :description, :image, :tags)
 	end
 
 	def access_to_action
