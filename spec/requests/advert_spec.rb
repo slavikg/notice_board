@@ -107,7 +107,15 @@ describe 'Page Adverts' do
 		it { should have_content advert.description }
 		it { should have_content "Author: #{advert.user.full_name}" }
 		it { should have_link(advert.user.full_name, user_path(advert.user)) }
-		it 'with tags' do should have_link "##{advert.tags}" end
+
+		it 'with tags' do
+			should have_link "##{advert.tags}"
+		end
+
+		it 'tap to tag' do
+			click_link "##{advert.tags}"
+			should have_selector('.advert h3', advert.name)
+	  end
 
 		describe 'without photo' do
 			before do

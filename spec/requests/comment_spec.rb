@@ -65,6 +65,16 @@ describe 'Comments' do
 				    it { should_not have_link 'Delete comment' }
 				  end
 				end
+
+				# it 'edit comment' do
+				# 	Capybara.automatic_reload = false
+				# 	find("#comment_#{comment.id}").click_link 'Edit comment'
+				# 	fill_in 'Comment', with: 'Edited comment'
+				# 	click_button 'Edit comment'
+				# 	save_and_open_page
+				# 	# comment.comment == 'Edited comment'
+				# 	# should have_content 'Edited comment'
+				# end
 			end
 
 			describe 'comment with textile content' do

@@ -18,6 +18,26 @@ class CommentsController < ApplicationController
 		end
 	end
 
+	def edit
+		@comment = Comment.find params[:id]
+		respond_to do |format|
+			format.html {redirect_to @comment.advert}
+			format.js
+		end
+	end
+
+	def update
+		@comment = Comment.find params[:id]
+		respond_to do |format|
+			if @comment.update_attributes comment_params
+				format.html {redirect_to @comment.advert}
+				format.js
+			else
+				format.html {render @comment.advert}
+			end
+		end
+	end
+
 	def destroy
 		@advert = Advert.find params[:advert_id]
 		@comment = @advert.comments.find(params[:id])

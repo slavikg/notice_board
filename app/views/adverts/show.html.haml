@@ -1,3 +1,5 @@
+-# %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"}
+
 - provide(:title, @advert.name)
 
 .container
@@ -5,6 +7,8 @@
 	= link_to 'Edit advert', edit_advert_path(@advert)
 	= link_to 'Delete advert', @advert, method: :delete, data: {confirm: 'You sure?'},
 		title: @advert.name
+
+	-# %a.btn{"data-toggle" => "modal", :href => "#modal", :role => "button"} Click Me
 
 	- if @comments.blank?
 		%h3#comments_label No comments
@@ -23,3 +27,18 @@
 
 			.new_line
 				= f.submit 'Create comment', class: 'btn btn-small btn-primary'
+
+-# #modal.modal.hide.fide
+-# 	.modal-header
+-# 		%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+-# 		%h2 Lorem Ipsum
+-# 	.modal-body
+-# 		%p
+-# 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat sem ipsum, ut faucibus nulla.
+-# 			Nullam mattis volutpat dolor, eu porta magna facilisis ut. In ultricies, purus sed pellentesque mollis, nibh
+-# 			tortor semper elit, eget rutrum purus nulla id quam.
+
+-# :javascript
+-# 	$('document').ready(function(){
+-# 		$('#modal').modal();
+-# 	});

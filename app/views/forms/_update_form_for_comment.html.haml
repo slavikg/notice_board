@@ -1,0 +1,9 @@
+= form_for [@comment.advert, @comment], remote: true,
+	html: {class: 'no_float'} do |f|
+	= render 'shared/error_messages', object: f.object
+
+	= f.label :comment, 'Edit comment area'
+	= f.text_area :comment
+
+	.new_line
+		= f.submit 'Edit comment', class: 'btn btn-small btn-primary'

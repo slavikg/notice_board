@@ -2,7 +2,7 @@ NoticeBoard::Application.routes.draw do
 	root 'adverts#index'
 	resources :users
 	resources :adverts do
-		resources :comments, only: [:create, :destroy]
+		resources :comments, only: [:create, :edit, :update, :destroy]
 	end
 	resources :sessions, only: [:new, :create, :destroy]
 	resources :password_resets
