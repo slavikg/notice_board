@@ -178,6 +178,7 @@ describe "User pages" do
 		it { should have_content user.state }
 		it { should have_content user.country }
 		it { should have_content user.zip }
+		it { should have_content user.role }
 
 		describe 'when show another users page' do
 			let(:invalid_user) { FactoryGirl.create :user }
@@ -195,6 +196,32 @@ describe "User pages" do
 
 		  it { should have_content advert.user.full_name }
 		  it { should have_content user.adverts.name }
+		end
+
+		describe 'roles' do
+		  it { should_not have_selector "#update_user_role_#{user.id}" }
+		  describe 'admin' do
+		    let(:admin_user) { FactoryGirl.create :user, role: 'admin' }
+		    before {sign_in admin_user}
+
+				# it { save_and_open_page }
+			  it { should have_selector "#update_user_role_#{admin_user.id}" }
+
+			  it 'change role for user' do
+			    visit user_path user
+			    select 'Moderator', from: 'user_role'
+			    # save_and_open_page
+			    click_button 'Change role'
+			    # save_and_open_page
+			    # user.role should == 'moderator'
+			    should have_selector 'h5#role', 'moderator'
+			    # expect(user.role).to eq 'moderator'
+			    user_id = user.id
+			    user = User.find user_id
+			    user.role.should == 'moderator'
+			    # expect{click_button 'Change role'}.to should have_selector('h5#role', 'moderator')
+			  end
+		  end
 		end
 	end
 end

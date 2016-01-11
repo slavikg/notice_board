@@ -1,6 +1,7 @@
 NoticeBoard::Application.routes.draw do
 	root 'adverts#index'
 	resources :users
+	patch 'users/:id/update_user_role' => 'users#update_user_role'
 	resources :adverts do
 		resources :comments, only: [:create, :edit, :update, :destroy]
 	end

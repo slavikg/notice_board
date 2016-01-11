@@ -9,6 +9,7 @@ FactoryGirl.define do
 		state "NY"
 		country "USA"
 		zip 12345
+		role 'user'
 		password "foobar"
 		password_confirmation "foobar"
 	end

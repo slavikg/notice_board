@@ -4,6 +4,12 @@
 	.row
 		.span6
 			%h2.user_profile_page= @user.login
+			%h5#role= @user.role
+			- if current_user.role? :admin
+				= form_for @user, url: {controller: 'users', action: 'update_user_role'},
+					html: {id: "update_user_role_#{@user.id}"} do |f|
+					= f.collection_select :role, User::ROLES, :to_s, :humanize
+					= f.submit 'Change role', class: 'btn btn-small btn-primary'
 			= image_tag @user.image_url
 			- if current_user? @user
 				.new_line

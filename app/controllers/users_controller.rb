@@ -39,6 +39,13 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def update_user_role
+		@user = User.find params[:id]
+		@user.role = params[:user][:role]
+		@user.save! validate: false
+		redirect_to @user
+	end
+
 	private
 		def user_params
 			params.require(:user).permit(:login, :full_name, :birthday, :email, :address,

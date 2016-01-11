@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
 
 	has_secure_password
 
+	ROLES = %w[admin moderator user]
+
 	def full_address
 		self.address.to_s + ' ' + self.city.to_s + ' ' + self.state.to_s + ' ' + self.country.to_s + ' ' + self.zip.to_s
 	end
@@ -77,6 +79,10 @@ class User < ActiveRecord::Base
 	# 	select(:id).where("full_name like :search_user",
 	# 		{search_user: "%#{params}%"})
 	# end
+
+	def role? role
+		role.to_s == self.role
+	end
 
 	private
 		def create_remember_token
