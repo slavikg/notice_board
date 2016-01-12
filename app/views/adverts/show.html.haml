@@ -4,29 +4,34 @@
 
 .container
 	= render @advert, user_advert: true, full_content: true
-	= link_to 'Edit advert', edit_advert_path(@advert)
-	= link_to 'Delete advert', @advert, method: :delete, data: {confirm: 'You sure?'},
-		title: @advert.name
+	- if can? :update, @advert
+		= link_to 'Edit advert', edit_advert_path(@advert)
+	- if can? :destroy, @advert
+		= link_to 'Delete advert', @advert, method: :delete, data: {confirm: 'You sure?'},
+			title: @advert.name
 
 	-# %a.btn{"data-toggle" => "modal", :href => "#modal", :role => "button"} Click Me
 
-	- if @comments.blank?
-		%h3#comments_label No comments
+	- if can? :read, Comment
+		- if @comments.blank?
+			%h3#comments_label No comments
+		- else
+			%h3#comments_label Comments
+		%div#container_comments
+			= render @comments
+
+		- if can? :create, Comment
+			= form_for [@advert, @advert.comments.build], remote: true,
+				html: {class: 'no_float'} do |f|
+				= render 'shared/error_messages', object: f.object
+
+				= f.label :comment
+				= f.text_area :comment
+
+				.new_line
+					= f.submit 'Create comment', class: 'btn btn-small btn-primary'
 	- else
-		%h3#comments_label Comments
-	%div#container_comments
-		= render @comments
-
-	- if signed_in?
-		= form_for [@advert, @advert.comments.build], remote: true,
-			html: {class: 'no_float'} do |f|
-			= render 'shared/error_messages', object: f.object
-
-			= f.label :comment
-			= f.text_area :comment
-
-			.new_line
-				= f.submit 'Create comment', class: 'btn btn-small btn-primary'
+		%h3#comments_label Please sign in for read and create comment
 
 -# #modal.modal.hide.fide
 -# 	.modal-header

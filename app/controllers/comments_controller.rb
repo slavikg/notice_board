@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+	
+	authorize_resource
 
 	def create
 		@advert = Advert.find params[:advert_id]

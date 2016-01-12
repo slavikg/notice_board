@@ -11,8 +11,13 @@ describe 'Comments' do
 		describe 'user_without_comment' do
 			let(:advert_without_comments) { FactoryGirl.create :advert }
 			before {visit advert_path advert_without_comments}
-			
-			it {should have_content 'No comments'}
+
+			it { should have_content 'Please sign in for read and create comment' }
+			it 'after sign in' do
+				sign_in advert_without_comments.user
+				visit advert_path advert_without_comments
+				should have_content 'No comments'
+			end
 		end
 
 		describe 'add comment with sign user' do

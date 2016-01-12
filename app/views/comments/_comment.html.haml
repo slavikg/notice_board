@@ -6,7 +6,7 @@
 			= image_tag comment.user.image_url, size: size
 		- else
 			= image_tag 'no_image.jpg', size: size
-		- if comment.user == current_user
+		- if can? :modify, comment
 			.new_line
 				= link_to 'Delete comment', advert_comment_path(comment.advert, comment),
 					method: :delete, remote: true, data: {confirm: 'You sure?'}

@@ -79,6 +79,7 @@ describe "User" do
 			expect(@user_without_password).not_to be_valid
 		end
 	end
+
 	describe "when password doesn't match confirmation" do
 		before {@user.password_confirmation = "mismatch"}
 		it { expect(@user).not_to be_valid }
@@ -87,6 +88,21 @@ describe "User" do
 	describe 'remember token' do
 		before {@user.save}
 		its(:remember_token) { should_not be_blank }
+	end
+
+	describe 'check admin.role == moderator' do
+		let(:moderator) { FactoryGirl.create :user, role: "moderator" }
+	  let(:ability) { Ability.new moderator }
+	  it 'check ability' do
+	  	ability.should be_able_to :manage, user.adverts.build
+	  	ability.should be_able_to :manage, moderator.adverts.build
+
+	  	ability.should be_able_to :manage, user.comments.build
+	  	ability.should be_able_to :manage, moderator.comments.build
+
+	  	ability.should_not be_able_to :modify, user
+	  	ability.should be_able_to :update, moderator
+	  end
 	end
 
 	describe 'authentication' do

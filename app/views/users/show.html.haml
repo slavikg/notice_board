@@ -5,13 +5,14 @@
 		.span6
 			%h2.user_profile_page= @user.login
 			%h5#role= @user.role
-			- if current_user.role? :admin
+			-# # - if current_user.role? :admin
+			- if can? :update_user_role, @user
 				= form_for @user, url: {controller: 'users', action: 'update_user_role'},
 					html: {id: "update_user_role_#{@user.id}"} do |f|
 					= f.collection_select :role, User::ROLES, :to_s, :humanize
 					= f.submit 'Change role', class: 'btn btn-small btn-primary'
 			= image_tag @user.image_url
-			- if current_user? @user
+			- if can? :update, @user
 				.new_line
 					= link_to "Edit my profile", edit_user_path(@user)
 		.span6

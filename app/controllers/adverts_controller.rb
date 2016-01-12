@@ -1,6 +1,8 @@
 class AdvertsController < ApplicationController
 
-	before_action :access_to_action, only: [:edit, :update, :destroy]
+	before_action :please_signin, only: :new
+	load_and_authorize_resource
+	# before_action :access_to_action, only: [:edit, :update, :destroy]
 
 	def index
 		# @adverts = Advert.all.paginate(page: params[:page])
@@ -27,14 +29,14 @@ class AdvertsController < ApplicationController
 	end
 
 	def show
-		@advert = Advert.find params[:id]
+		# @advert = Advert.find params[:id]
 		@comments = @advert.comments
 		# @comment = @advert.comments.build
 	end
 
 	def new
 		please_signin
-		@advert = Advert.new
+		# @advert = Advert.new
 	end
 
 	def create
@@ -48,9 +50,12 @@ class AdvertsController < ApplicationController
 	end
 
 	def edit
+		# @advert = Advert.find params[:id]
+		# authorize! :edit, @advert
 	end
 
 	def update
+		# @advert = Advert.find params[:id]
 		@advert.update_attributes advert_params
 		if @advert.save
 			flash[:success] = 'Advert update success!'
@@ -61,7 +66,7 @@ class AdvertsController < ApplicationController
 	end
 
 	def destroy
-		@advert = Advert.find params[:id]
+		# @advert = Advert.find params[:id]
 		@advert.destroy
 		flash[:success] = 'Your advert have been deleted!'
 		redirect_to root_url
@@ -73,9 +78,9 @@ class AdvertsController < ApplicationController
 		params.require(:advert).permit(:name, :description, :image, :tags)
 	end
 
-	def access_to_action
-		@advert = Advert.find params[:id]
-		redirect_to @advert,
-			notice: "You don't have permittion to edit this advert! Please sign in if this your advert" if !current_user?(@advert.user)
-	end
+	# def access_to_action
+	# 	@advert = Advert.find params[:id]
+	# 	redirect_to @advert,
+	# 		notice: "You don't have permittion to edit this advert! Please sign in if this your advert" if !current_user?(@advert.user)
+	# end
 end
