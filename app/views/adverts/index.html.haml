@@ -17,7 +17,8 @@
 		= submit_tag "Search", class: 'btn btn-primary btn-primary'
 
 	- if @adverts.blank?
-		%p No adverts
+		.new_line.no_float
+			%p No adverts
 	- else
 		.row
 			.adverts_box
