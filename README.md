@@ -1,5 +1,6 @@
 Notice Board [![Build Status](https://travis-ci.org/slavikg/notice_board.svg)](https://travis-ci.org/slavikg/notice_board)
 =========
+## Gem Device was not used because when I started to develop this website I knew nothing about it
 
 ## Tests for sending password recovery commented in the file spec/requests/users_helper_spec.rb
 

@@ -2,21 +2,26 @@
 
 .container
 
-	%h1.new_section Adverts
+	.float_left
+		%h1.new_section.adverts_h1 Adverts
+
+		- if can? :create, Advert
+			= link_to 'New advert', new_advert_path, class: 'btn btn-primary btn-small'
 
 	-# = form_for adverts_path, method: :get do |f|
 	-# 	= f.text_field :search, params[:search]
 	-# 	= f.submit "Search"
 
-	= form_tag adverts_path, method: :get do
+	= form_tag adverts_path, method: :get, class: 'search_form' do
 		= text_field_tag :search, params[:search]
-		= submit_tag "Search"
+		= submit_tag "Search", class: 'btn btn-primary btn-primary'
 
 	- if @adverts.blank?
 		%p No adverts
 	- else
 		.row
-			- @adverts.each do |advert|
-				.span6
-					= render advert, user_advert: true, full_content: false
-			= will_paginate @adverts
+			.adverts_box
+				- @adverts.each do |advert|
+					.span6
+						= render advert, user_advert: true, full_content: false
+				= will_paginate @adverts, inner_window: 2, outer_window: 1

@@ -63,8 +63,14 @@ describe "User pages" do
 			it { should have_title user.login }
 
 			describe 'by signout' do
-				before {click_link 'Sign out'}
-				it { should have_link 'Sign in' }
+				# before {click_link 'Sign out'}
+				# it { should have_link 'Sign in' }
+				it do
+					should have_content 'Profile'
+					click_link 'Sign out'
+					# delete signout_path
+					should have_selector 'h1', 'Sign in'
+				end
 			end
 		end
 
@@ -183,7 +189,8 @@ describe "User pages" do
 		describe 'when show another users page' do
 			let(:invalid_user) { FactoryGirl.create :user }
 			before {visit user_path invalid_user}
-			it { should_not have_content 'Edit my profile' }
+			# it { should_not have_content 'Edit my profile' }
+			it { should_not have_link edit_user_path invalid_user }
 		end
 
 		describe 'without Adverts' do

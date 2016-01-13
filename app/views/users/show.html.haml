@@ -6,15 +6,15 @@
 			%h2.user_profile_page= @user.login
 			%h5#role= @user.role
 			-# # - if current_user.role? :admin
+			= image_tag @user.image_url
+			- if can? :update, @user
+				.new_line
+					= link_to "Edit my profile", edit_user_path(@user)
 			- if can? :update_user_role, @user
 				= form_for @user, url: {controller: 'users', action: 'update_user_role'},
 					html: {id: "update_user_role_#{@user.id}"} do |f|
 					= f.collection_select :role, User::ROLES, :to_s, :humanize
 					= f.submit 'Change role', class: 'btn btn-small btn-primary'
-			= image_tag @user.image_url
-			- if can? :update, @user
-				.new_line
-					= link_to "Edit my profile", edit_user_path(@user)
 		.span6
 			.user_information= @user.full_name
 			.user_information= @user.birthday
@@ -33,12 +33,17 @@
 					,
 					= @user.zip
 		= render 'shared/user_map'
-	%h2.new_section Adverts
+	%h2.new_section.adverts_h2 Adverts
+
+	- if (can? :create, Advert) && @user == current_user
+		= link_to 'New advert', new_advert_path, class: 'btn btn-primary btn-small'
+
 	- if @adverts.blank?
 		%p No adverts
 	- else
 		.row
-			- @adverts.each do |advert|
-				.span6
-					= render advert, user_advert: false, full_content: false
-			= will_paginate @adverts
+			.adverts_box
+				- @adverts.each do |advert|
+					.span6
+						= render advert, user_advert: false, full_content: false
+				= will_paginate @adverts, inner_window: 2, outer_window: 1

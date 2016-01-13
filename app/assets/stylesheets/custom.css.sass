@@ -32,6 +32,56 @@ h1
 		border-color: #f00
 .new_line
 	display: block
+.pagination
+	clear: both
+	& > ul
+		margin-top: 20px
+		// display: block
+form
+	select,
+	input#search
+		margin: 0px
+header
+	background: rgba(200, 230, 230, .7)
+	margin-bottom: 40px
+	ul, li
+		// display: inline-block
+		float: left
+	li
+		border-left: 1px solid rgba(154, 185, 185, 0.62)
+		a
+			display: inline-block
+			padding: 15px
+			&:focus,
+			&:hover
+				text-decoration: none
+			&:hover
+				background: rgba(180, 210, 210, 0.71)
+		&:last-child
+			border-right: 1px solid rgba(154, 185, 185, 0.62)
+	.profile_block
+		float: right
+	.main > li
+		position: relative
+		float: none
+		&:hover .sub
+			display: inline-block
+	.sub
+		display: none
+		position: absolute
+		width: 150px
+		margin-left: -1px
+		background: #cee8e8
+		li
+			display: block
+			border-top: 1px solid rgba(154, 185, 185, 0.62)
+			border-right: 1px solid rgba(154, 185, 185, 0.62)
+			float: none
+			&:last-child
+				border-bottom: 1px solid rgba(154, 185, 185, 0.62)
+			a
+				display: block
+				// width: 100%
 .sign_up
 	input[type='submit']
 		margin-top: 20px
@@ -41,6 +91,8 @@ h2.user_profile_page
 	font-size: 41px
 	line-height: 41px
 	margin-bottom: 5px
+form[id^='update_user_role']
+	margin-top: 10px
 .user_information
 	font-size: 18px
 	line-height: 22px
@@ -52,6 +104,21 @@ h2.user_profile_page
 .new_section
 	margin-top: 25px
 	margin-bottom: 10px
+.adverts_h1,
+.adverts_h2
+	display: inline-block
+	margin-right: 30px
+.adverts_h1 + a
+	margin-top: -14px
+.adverts_h2 + a
+	margin-top: -11px
+.adverts_box,
+.users_box
+	.span6:nth-child(2n+1)
+		clear: both
+.search_form
+	float: right
+	margin-top: 30px
 .advert_image,
 .user_image
 	float: left
