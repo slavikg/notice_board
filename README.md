@@ -7,3 +7,10 @@ Notice Board [![Build Status](https://travis-ci.org/slavikg/notice_board.svg)](h
 ## Low coverage through tests Commented tests to send password recovery
 
 ## AJAX no testing!
+
+## Populate data with "rake db:populate"
+
+## Sign in
+
+admin -> login: slavikg, password: foobar
+moderator -> login: persone_1, password: foobar

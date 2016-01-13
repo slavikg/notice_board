@@ -3,11 +3,15 @@ namespace :db do
 	task populate: :environment do
 		User.create!(login: "slavikg", full_name: "Slavik G",
     		birthday: "20 02 1994", email: "example@gmail.com", address: "Wall Street",
-    		city: "NY", state: "NY", country: "USA", zip: 10007,
+    		city: "NY", state: "NY", country: "USA", zip: 10007, role: "admin",
     		password: "foobar", password_confirmation: "foobar")
-		30.times do |n|
-			User.create!(login: "persone_#{n}", full_name: Faker::Name.name,
-    		birthday: "20 02 1994", email: "person#{n}@gmail.com", address: "7th ave",
+		User.create!(login: "persone_1}", full_name: Faker::Name.name,
+    		birthday: "20 02 1994", email: "person1@gmail.com", address: "7th ave",
+    		city: "NY", state: "NY", country: "USA", zip: 10036, role: "moderator",
+    		password: "foobar", password_confirmation: "foobar")
+		29.times do |n|
+			User.create!(login: "persone_#{n+2}", full_name: Faker::Name.name,
+    		birthday: "20 02 1994", email: "person#{n+2}@gmail.com", address: "7th ave",
     		city: "NY", state: "NY", country: "USA", zip: 10036,
     		password: "foobar", password_confirmation: "foobar")
 		end
