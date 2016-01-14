@@ -5,7 +5,7 @@ namespace :db do
     		birthday: "20 02 1994", email: "example@gmail.com", address: "Wall Street",
     		city: "NY", state: "NY", country: "USA", zip: 10007, role: "admin",
     		password: "foobar", password_confirmation: "foobar")
-		User.create!(login: "persone_1}", full_name: Faker::Name.name,
+		User.create!(login: "persone_1", full_name: Faker::Name.name,
     		birthday: "20 02 1994", email: "person1@gmail.com", address: "7th ave",
     		city: "NY", state: "NY", country: "USA", zip: 10036, role: "moderator",
     		password: "foobar", password_confirmation: "foobar")

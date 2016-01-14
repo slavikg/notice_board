@@ -26,10 +26,15 @@ class Advert < ActiveRecord::Base
 		# where("(name || description like :search_param) || (user_id like :search_by_user)",
 		# 		{search_param: "%#{params}%",
 		# 		search_by_user: "%#{User.search_for_advert(params)}%" })
-		joins(:user).where("(adverts.name || adverts.description || adverts.tags like :search_param)
-			|| (users.full_name || users.address || users.city || users.state ||
-			users.country || users.zip like :search_param)",
-			{search_param: "%#{params}%"})
+		# joins(:user).where("(adverts.name || adverts.description || adverts.tags like :search_param)
+		# 	|| (users.full_name || users.address || users.city || users.state ||
+		# 	users.country || users.zip like :search_param)",
+		# 	{search_param: "%#{params}%"})
+	joins(:user).where("adverts.name like :search_param or adverts.description like :search_param or
+		adverts.tags like :search_param or users.full_name like :search_param or
+		users.address like :search_param or users.city like :search_param or users.state like :search_param or
+		users.country like :search_param or users.zip like :search_param",
+		{search_param: "%#{params}%"})
 	end
 	
 end

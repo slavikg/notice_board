@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 	before_action :hash_for_gmap, only: [:show, :new, :edit]
 
 	def index
-		@users = User.all.paginate(page: params[:page], per_page: 20)
+		@users = User.order(:created_at).paginate(page: params[:page], per_page: 20)
 	end
 
 	def show
